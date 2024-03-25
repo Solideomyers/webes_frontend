@@ -1,15 +1,16 @@
+import { ReviewHead } from '../reviews/ReviewsHead';
 export const Enlaces = () => {
   return (
-    <div className='grid grid-cols-2 grid-flow-col-dense gap-2 w-full sm:gap-4 sm:grid-cols-3'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 place-items-stretch py-1 gap-2 '>
       {/* informacion */}
-      <div>
-        <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+      <div className='bg-[#ccc]/5 border border-[#ccc]/10 rounded-lg py-2 px-3'>
+        <h2 className='mb-3 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
           Información
         </h2>
         <ul className=' w-full flex flex-col text-gray-600 dark:text-gray-400'>
-          <li className='group mb-4 '>
+          <li className='group  '>
             <a
-              href='https://www.lawebdelcolchon.es/pages.php?id=2&footer=1'
+              href='/politica'
               className='hover:underline group-hover:text-primary transition-colors ease-linear delay-150 duration-150 w-full'
             >
               Politica de Privacidad
@@ -17,7 +18,7 @@ export const Enlaces = () => {
           </li>
           <li className='group'>
             <a
-              href='https://www.lawebdelcolchon.es/pages.php?id=3&footer=1'
+              href='/aboutus'
               className='hover:underline group-hover:text-primary transition-colors ease-linear delay-150 duration-150'
             >
               Quienes somos
@@ -50,12 +51,12 @@ export const Enlaces = () => {
         </ul>
       </div>
       {/* mi cuenta */}
-      <div>
-        <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+      <div className='bg-[#ccc]/5 border border-[#ccc]/10 rounded-lg py-2 px-3'>
+        <h2 className='mb-3 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
           Mi Cuenta
         </h2>
         <ul className='text-gray-600 dark:text-gray-400'>
-          <li className='group mb-4'>
+          <li className='group'>
             <a
               href='https://www.lawebdelcolchon.es/account.php'
               className='hover:underline group-hover:text-primary transition-colors ease-linear delay-150 duration-150 '
@@ -82,8 +83,8 @@ export const Enlaces = () => {
         </ul>
       </div>
       {/* contacto */}
-      <div>
-        <h2 className='mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
+      <div className='bg-[#ccc]/5 border border-[#ccc]/10 rounded-lg py-2 px-3'>
+        <h2 className='mb-3 text-sm font-semibold text-gray-900 uppercase dark:text-white'>
           Contacto
         </h2>
         <ul className='flex flex-col gap-2 text-gray-600 dark:text-gray-400'>
@@ -117,8 +118,27 @@ export const Enlaces = () => {
           <li className='group'>
             <a
               href='tel:648709325'
-              className='hover:underline text-sm items-center w-full flex gap-1 group-hover:text-primary transition-colors ease-linear delay-150 duration-150'
+              className='text-[#25D366] hover:underline text-sm items-center w-full flex gap-1 group-hover:text-primary transition-colors ease-linear delay-150 duration-150'
             >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                className='icon icon-tabler icon-tabler-phone-filled'
+                width={24}
+                height={24}
+                viewBox='0 0 24 24'
+                strokeWidth={2}
+                stroke='currentColor'
+                fill='none'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              >
+                <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                <path
+                  d='M9 3a1 1 0 0 1 .877 .519l.051 .11l2 5a1 1 0 0 1 -.313 1.16l-.1 .068l-1.674 1.004l.063 .103a10 10 0 0 0 3.132 3.132l.102 .062l1.005 -1.672a1 1 0 0 1 1.113 -.453l.115 .039l5 2a1 1 0 0 1 .622 .807l.007 .121v4c0 1.657 -1.343 3 -3.06 2.998c-8.579 -.521 -15.418 -7.36 -15.94 -15.998a3 3 0 0 1 2.824 -2.995l.176 -.005h4z'
+                  strokeWidth={0}
+                  fill='currentColor'
+                />
+              </svg>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 className='icon icon-tabler icon-tabler-brand-whatsapp'
