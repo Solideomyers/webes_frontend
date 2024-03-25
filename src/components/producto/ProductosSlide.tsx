@@ -1,5 +1,6 @@
 'use client';
-import React, { useCallback, useMemo, useState } from 'react';
+
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import {
@@ -9,30 +10,28 @@ import {
 } from '../../hooks';
 import { Producto, ProductoSk } from '..';
 import { type ProductsByCat } from '../../interfaces';
+import { v4 as uuidv4 } from 'uuid';
 
-const ProductoMemo = React.memo(Producto);
+const ProductoMemo = memo(Producto);
 
 interface Props extends ProductsByCat {
-  offer: boolean;
+  offer?: boolean;
   prefetchProduct?: (idp: number, ido: number) => void;
 }
 
 export const ProductosSlide: React.FC = () => {
-  const [isCatId, setIsCatId] = useState(1);
+  const [isCatId, setIsCatId] = useState('1');
   const { categoriaIdQuery } = useCategoriaId(isCatId);
   const { prefetchProduct } = usePrefetchProduct();
   const { prefetchProductsByCat } = usePrefetchCatByPro();
   const products = useMemo(() => {
-    return categoriaIdQuery?.data?.data?.products_by_cat?.slice(0, 10);
+    return categoriaIdQuery?.data?.data?.products_by_cat?.slice(0, 20);
   }, [categoriaIdQuery, categoriaIdQuery.isLoading, categoriaIdQuery.error]);
 
   //
   const items = useMemo(() => {
     return products?.map((obj: Props) => (
-      <div
-        key={obj.id_o}
-        className='h-50 w-full max-w-xs z-10 flex justify-center px-1'
-      >
+      <div key={uuidv4()} className='p-2'>
         <ProductoMemo
           attribute_price={obj.attribute_price}
           proname={obj.proname}
@@ -41,7 +40,7 @@ export const ProductosSlide: React.FC = () => {
           id_o={obj.id_o}
           cat_name={obj.cat_name}
           idp={obj.idp}
-          offer={false}
+          offer={true}
           prefetchProduct={prefetchProduct}
         />
       </div>
@@ -52,13 +51,19 @@ export const ProductosSlide: React.FC = () => {
   const handleCatid = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
-      setIsCatId(Number(e.currentTarget.id));
+      setIsCatId(e.currentTarget.id);
     },
     [isCatId]
   );
 
+  const responsive = {
+    0: { items: 1 },
+    568: { items: 2 },
+    1024: { items: 4 },
+  };
+
   return (
-    <section className='border border-[#cccccc] bg-[#f5f5f5] shadow hover:bg-white mx-4 rounded-xl py-4 px-1 flex flex-col items-center w-full max-w-xs sm:w-full sm:max-w-2xl sm:px-4 lg:w-full lg:max-w-7xl lg:px-0.5'>
+    <section className='col-span-2 border border-[#cccccc] bg-[#f5f5f5] shadow hover:bg-white mx-4 rounded-xl py-4 px-1 flex flex-col items-center w-full max-w-xs sm:w-full sm:max-w-2xl sm:px-4 lg:w-full lg:max-w-7xl lg:px-0.5 my-4'>
       <h1 className='ml-4 text-start w-full font-bold text-2xl text-[#333333] pb-4'>
         Productos
       </h1>{' '}
@@ -76,7 +81,7 @@ export const ProductosSlide: React.FC = () => {
           </li>
           <li className='me-2'>
             <button
-              onMouseEnter={() => prefetchProductsByCat(9)}
+              onMouseEnter={() => prefetchProductsByCat('9')}
               onClick={handleCatid}
               id='9'
               className='inline-block p-4 font-semibold focus:text-primary border-b-2 focus:border-primary rounded-t-lg dark:text-blue-500 dark:border-blue-500'
@@ -87,7 +92,7 @@ export const ProductosSlide: React.FC = () => {
           </li>
           <li className='me-2'>
             <button
-              onMouseEnter={() => prefetchProductsByCat(50)}
+              onMouseEnter={() => prefetchProductsByCat('50')}
               onClick={handleCatid}
               id='50'
               className='inline-block p-4 font-semibold focus:text-primary border-b-2 focus:border-primary rounded-t-lg dark:text-blue-500 dark:border-blue-500'
@@ -97,40 +102,28 @@ export const ProductosSlide: React.FC = () => {
           </li>
         </ul>
       </nav>
-      {!categoriaIdQuery ? (
-        <div className='inline-flex overflow-hidden'>
-          {[1, 2, 3].map((_, i) => (
-            <div key={i} className='w-full inline-flex'>
-              <ProductoSk />
+      {categoriaIdQuery.isLoading || categoriaIdQuery.isFetching ? (
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'>
+          {[1, 2].map((_) => (
+            <div key={uuidv4()} className='w-full'>
+              <ProductoSk key={uuidv4()} />
             </div>
           ))}
         </div>
       ) : (
-        <div className='w-full'>
-          <AliceCarousel
-            items={items}
-            autoPlay
-            disableDotsControls={false}
-            autoPlayInterval={4000}
-            infinite
-            animationType='fadeout'
-            autoWidth
-            swipeExtraPadding={200}
-            disableButtonsControls
-            mouseTracking
-            responsive={{
-              0: {
-                items: 1,
-              },
-              375: {
-                items: 1,
-              },
-              1024: {
-                items: 3,
-              },
-            }}
-          />
-        </div>
+        <AliceCarousel
+          items={items}
+          autoPlay
+          disableDotsControls={false}
+          autoPlayInterval={4000}
+          infinite
+          animationType='fadeout'
+          animationDuration={500}
+          controlsStrategy='alternate'
+          disableButtonsControls
+          mouseTracking
+          responsive={responsive}
+        />
       )}
     </section>
   );
