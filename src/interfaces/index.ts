@@ -6,4 +6,5 @@ export {
   type Related,
   type ProductDetail,
   type Atributo,
+  type ProductPropoerties,
 } from './productos/productid';
