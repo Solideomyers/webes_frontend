@@ -139,7 +139,7 @@ export interface Totales {
 // interfaces for management state porduct selected in ProductoDetail, SeccionDetail and DropdownUI
 export interface Selected {
   selected?: Atributo;
-  setSelected?: React.Dispatch<React.SetStateAction<Atributo>>;
+  setSelected: React.Dispatch<React.SetStateAction<Atributo>>;
 }
 
 export interface ProductPropoerties extends Selected {
