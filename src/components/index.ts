@@ -10,7 +10,6 @@ export { Notfound } from './notfound/Notfound';
 export { Loading } from './loading/Loading';
 export { LoadingIcon } from './loading/LoadingIcon';
 export { ProductoSk } from './skeleton/ProductoSk';
-export { CategoriaSk } from './skeleton/CategoriaSk';
 
 // productos
 export { Productos } from './producto/Productos';
@@ -22,7 +21,6 @@ export { ProductosRelated } from './producto/ProductosRelated';
 export { Accordeon } from './accordeon/Accordeon';
 
 // categorias
-export { Categoria } from './categoria/Categoria';
 export { Categorias } from './categoria/Categorias';
 
 // footer
@@ -39,6 +37,9 @@ export { Cart } from './cart/Cart';
 export { Form } from './contact/Form';
 export { Filter } from './filter/Filter';
 
+// reviews
+export { ReviewHead } from './reviews/ReviewsHead';
+
 // UI
 export { Input } from './ui/Input';
 export { Button } from './ui/Button';
@@ -46,7 +47,6 @@ export { ButtonSecondary } from './ui/ButtonSecondary';
 export { Label } from './ui/Label';
 export { ComboBoxUi } from './ui/ComboBoxUi';
 export { DropdownUi } from './ui/DropdownUi';
-export { FavoriteButton } from './ui/FavoriteButton';
 export { SocialIcons } from './ui/SocialIcons';
-export { Reviews } from './ui/Reviews';
+export { Review } from './ui/Review';
 export { TooltipUi } from './ui/TooltipUi';
