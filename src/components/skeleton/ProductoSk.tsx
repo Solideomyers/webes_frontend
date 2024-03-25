@@ -1,40 +1,79 @@
 'use client';
-import { Skeleton } from 'keep-react';
-import React from 'react';
+import { Card, CardBody, CardFooter, Image } from '@nextui-org/react';
+import { FaCartPlus } from 'react-icons/fa6';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import { TbTruckDelivery } from 'react-icons/tb';
+import { MdLocalOffer } from 'react-icons/md';
 
 export const ProductoSk: React.FC = () => {
   return (
-    <div
-      role='status'
-      className='w-96 overflow-hidden animate-pulse p-4 border rounded-xl shadow  md:p-6 dark:border-gray-700'
+    <Card
+      className='animate-fadeIn bg-[rgba(123,122,120,0.22)]/5 w-full aspect-auto border border-[#ccc]'
+      shadow='sm'
+      isPressable
     >
-      <Skeleton>
-        <div className='flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700'>
-          <svg
-            className='w-10 h-10 text-gray-200 animate-pulse dark:text-gray-600'
-            aria-hidden='true'
-            xmlns='http://www.w3.org/2000/svg'
-            fill='currentColor'
-            viewBox='0 0 16 20'
-          >
-            <path d='M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z' />
-            <path d='M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z' />
-          </svg>
+      <CardBody className='overflow-visible p-0'>
+        <Image
+          shadow='sm'
+          isZoomed
+          radius='lg'
+          width='100%'
+          alt={'image'}
+          className='w-full object-cover animate-pulse'
+          src='https://dummyimage.com/300/bababa/fff.png'
+        />
+      </CardBody>
+      <CardFooter className='flex flex-col gap-1 justify-center text-small items-start'>
+        <div className='flex flex-col items-start w-full'>
+          <b className='text-transparent text-left text-ellipsis w-full mb-1'>
+            colchon
+          </b>
+          <div className={`flex justify-between gap-2 w-full`}>
+            {/* offer */}
+            <div className='flex gap-1 shadow bg-[rgba(123,122,120,0.22)] text-[rgba(123,122,120,0.22)] rounded-xl py-1 px-2'>
+              <span className='font-medium'>10%</span>
+
+              <MdLocalOffer
+                className='text-[rgba(123,122,120,0.22)]'
+                size={20}
+              />
+            </div>
+
+            {/* price */}
+            <p className=' font-semibold text-transparent text-right'>
+              Desde 300.00$
+            </p>
+          </div>
+          <div className='flex justify-between items-center w-full'>
+            <p className='flex items-center gap-1 bg-[#cccccc12] rounded-xl p-2 font-semibold text-[#000000c4]'>
+              <FaStar className='text-[rgba(123,122,120,0.22)]' />
+              <FaStar className='text-[rgba(123,122,120,0.22)]' />
+              <FaStar className='text-[rgba(123,122,120,0.22)]' />
+              <FaStar className='text-[rgba(123,122,120,0.22)]' />
+              <FaStarHalfAlt className='text-[rgba(123,122,120,0.22)]' /> 4.2
+            </p>
+
+            <span className='flex gap-1 items-center border p-2 rounded-xl shadow text-xs font-semibold text-[rgba(123,122,120,0.22)]'>
+              <TbTruckDelivery />
+              Entrega 24H
+            </span>
+          </div>
         </div>
-        <div className='h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4'></div>
-        <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5'></div>
-        <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5'></div>
-        <div className='h-2 bg-gray-200 rounded-full dark:bg-gray-700'></div>
-        <div className='flex justify-between items-center mt-4'>
-          <button className='h-8 py-4 px-16 border bg-gray-200 rounded-full'>
-            {' '}
-          </button>
-          <button className='h-8 py-4 px-16 border bg-gray-200 rounded-full'>
-            {' '}
-          </button>
+        <div className='flex flex-row-reverse justify-between items-center w-full'>
+          <div>
+            <button className='flex justify-center items-center hover:scale-105 transition-all ease-out delay-150 p-2 bg-[rgba(123,122,120,0.22)] text-white rounded-xl w-full'>
+              <FaCartPlus />
+            </button>
+            {/* <FaCartPlus /> */}
+          </div>
+          <div>
+            {/* <h1>Ver producto</h1> */}
+            <button className='flex justify-center items-center animate-pulse text-transparent border-2 border-[rgba(123,122,120,0.22)] p-2 shadow-inner shadow-[#ccccccf6] scale-110 bg-[rgba(123,122,120,0.22)] rounded-xl'>
+              Ver producto
+            </button>
+          </div>
         </div>
-      </Skeleton>
-      {/* <span className='sr-only'>Cargando...</span> */}
-    </div>
+      </CardFooter>
+    </Card>
   );
 };
