@@ -49,8 +49,10 @@ export const useCategorias = () => {
       }
       return nextPage;
     },
-    // staleTime: 100 * 60 * 60,
+
+    staleTime: 100 * 60 * 60,
   });
+
   return {
     categoriasQuery,
     categoriasInfiniteQuery,
