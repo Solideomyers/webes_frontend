@@ -5,7 +5,7 @@ interface Productos {
 }
 export const ProductosRelated: React.FC<Productos> = ({ items }) => {
   return (
-    <div className='w-full max-w-4xl flex items-center'>
+    <div className='w-full max-w-4xl flex items-center mt-4'>
       <AliceCarousel
         paddingLeft={7}
         paddingRight={7}
