@@ -1,26 +1,11 @@
-import { Atributo } from '../../interfaces';
-import {
-  Accordeon,
-  Button,
-  DropdownUi,
-  FavoriteButton,
-  Reviews,
-  SocialIcons,
-} from '..';
+import { type ProductPropoerties } from '../../interfaces';
+import { Button } from '@nextui-org/react';
+import { Accordeon, DropdownUi, Review, SocialIcons } from '..';
 import { GiNightSleep } from 'react-icons/gi';
 import { PiSealCheckFill } from 'react-icons/pi';
+import { MdFavorite } from 'react-icons/md';
 
-interface Selected {
-  selected: Atributo;
-  setSelected: React.Dispatch<React.SetStateAction<Atributo>>;
-  cat_name: string;
-  proname: string;
-  attribute_price: string;
-  description: string;
-  atributos: Atributo[];
-}
-
-export const SeccionDetailR: React.FC<Selected> = ({
+export const SeccionDetailR: React.FC<ProductPropoerties> = ({
   cat_name,
   proname,
   attribute_price,
@@ -42,36 +27,50 @@ export const SeccionDetailR: React.FC<Selected> = ({
       </h1>
       <div className='flex mb-4 justify-between mx-4'>
         {/* reviews */}
-        <Reviews />
+        <Review />
 
         {/* social */}
-        <SocialIcons />
+        <SocialIcons proname={proname} description={textDescription} />
       </div>
       {/* descripcion formateada */}
       <p
-        className='leading-relaxed font-thin'
-        dangerouslySetInnerHTML={{ __html: textDescription }}
+        className='leading-relaxed font-extralight text-justify text-balance'
+        // dangerouslySetInnerHTML={{ __html: textDescription }}
       >
-        {/* {textDescription || "DESCRIPCION DEL PRODUCTO"} */}
+        {textDescription || 'DESCRIPCION DEL PRODUCTO'}
       </p>
       {/* medidas y color */}
-      <div className=' flex mt-6 items-center justify-between  border-gray-100 mb-5'>
+      <div className='flex mt-6 items-center justify-between  border-gray-100 mb-5'></div>
+      {/* seccion de precio y button */}
+      <div className='flex mb-2 justify-between bg-white px-2 py-1 rounded-2xl'>
         <DropdownUi
           selected={selected}
           setSelected={setSelected}
           atributos={atributos}
         />
-      </div>
-      {/* seccion de precio y button */}
-      <div className='flex mb-2 justify-between bg-white px-2 py-1 rounded-2xl'>
-        <span className='title-font font-medium text-2xl text-gray-900'>
-          {Number(attribute_price) || 'PRECIO'}€
-        </span>
-        <div className='flex'>
-          <FavoriteButton />
+        <div className='flex justify-center gap-2 w-full'>
+          <span className='flex line-through ordinal text-xl items-center text-gray-900/20'>
+            {Number(selected?.attribute_price) || 'PRECIO'}€
+          </span>
+          <span className='flex items-center title-font font-medium proportional-nums text-2xl text-[#3D3D3D]'>
+            {Number(selected?.attribute_price) || 'PRECIO'}€
+          </span>
+        </div>
+        <div className='flex items-center justify-between gap-2'>
+          <Button
+            isIconOnly
+            aria-label='like'
+            variant='light'
+            color='primary'
+            radius='full'
+          >
+            <MdFavorite />
+          </Button>
         </div>
       </div>
-      <Button variant={'primary'}>Comprar</Button>
+      <Button variant='solid' color='primary' fullWidth>
+        Comprar
+      </Button>
       <Accordeon
         icon={<GiNightSleep />}
         title='Pruebalo y devuelvelo gratis'
