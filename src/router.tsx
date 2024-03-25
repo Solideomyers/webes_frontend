@@ -1,33 +1,44 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import {
-  CategoriaPage,
-  ContactPage,
-  HomePage,
-  NotfoundPage,
-  ProductoPage,
-} from './pages';
 import { Breadcrumbs, Cart } from './components';
+import {
+  CategoriaView,
+  ContactView,
+  Home,
+  NotfoundView,
+  ProductoView,
+} from './pages';
+import { ReviewsView } from './pages/reviews/Reviews';
+import { SignIn } from './pages/user/SignIn';
+import { PoliticaPage } from './pages/politica/PoliticaPage';
+import { About } from './pages/aboutus/About';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <NotfoundView />,
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <Home />,
         id: 'home',
       },
       {
         path: '/categoria/:id',
-        element: <CategoriaPage />,
+        element: <CategoriaView />,
         id: 'categoriabyid',
       },
       {
         path: '/categoria/:id/producto/:idp/:ido',
-        element: <ProductoPage />,
+        element: <ProductoView />,
         id: 'productobyidp',
+
+        errorElement: (
+          <div>
+            <h1>Error</h1>
+          </div>
+        ),
       },
       {
         path: '/cart',
@@ -36,13 +47,33 @@ export const router = createBrowserRouter([
       },
       {
         path: '/contact',
-        element: <ContactPage />,
+        element: <ContactView />,
+      },
+      {
+        path: '/reviews',
+        element: <ReviewsView />,
+      },
+      {
+        path: '/signin',
+        element: <SignIn />,
+      },
+      {
+        path: '/politica',
+        element: <PoliticaPage />,
+      },
+      {
+        path: '/aboutus',
+        element: <About />,
       },
     ],
   },
   {
     path: '*',
-    element: <NotfoundPage />,
+    element: (
+      <>
+        <h1>error page 2</h1>
+      </>
+    ),
   },
   {
     path: '*',
