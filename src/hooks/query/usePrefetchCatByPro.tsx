@@ -4,7 +4,7 @@ import { categoriasActions } from '..';
 export const usePrefetchCatByPro = () => {
   const queryClient = useQueryClient();
 
-  const prefetchProductsByCat = (id: number) => {
+  const prefetchProductsByCat = (id: string) => {
     queryClient.prefetchQuery({
       queryKey: ['categorias', id],
       queryFn: () => categoriasActions.getCategoriaById(id),
