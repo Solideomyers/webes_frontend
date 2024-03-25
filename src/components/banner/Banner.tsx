@@ -1,3 +1,4 @@
+import { Navbar } from '@nextui-org/react';
 import { useEffect, useMemo, useState } from 'react';
 
 export const Banner = () => {
@@ -24,10 +25,9 @@ export const Banner = () => {
     }, 3000);
     return () => clearInterval(interval);
   }, [index, prompter.length]);
-  //
 
   return (
-    <div className=' flex justify-between w-full h-6 p-4 border-b border-gray-200 bg-primary dark:bg-gray-700 dark:border-gray-600'>
+    <nav className=' flex justify-between w-full h-6 p-4 border-b border-gray-200 bg-primary dark:bg-gray-700 dark:border-gray-600'>
       <div className='flex items-center mx-auto'>
         <p className='flex items-center text-sm font-normal text-white dark:text-gray-400'>
           <span className='inline-flex p-1 me-3 bg-white rounded-full dark:bg-gray-600 w-6 h-6 items-center justify-center flex-shrink-0'>
@@ -54,6 +54,6 @@ export const Banner = () => {
           ))}
         </p>
       </div>
-    </div>
+    </nav>
   );
 };
