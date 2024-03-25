@@ -3,15 +3,15 @@ export const Tabinfo = () => {
     <div className='w-full my-4 bg-white border border-gray-200 rounded-xl shadow dark:bg-gray-800 dark:border-gray-700'>
       <div className='sm:hidden'>
         <label htmlFor='tabs' className='sr-only'>
-          Select
+          por qué comprar en La Web del colcchón
         </label>
         <select
           id='tabs'
           className='bg-gray-50 border-0 border-b border-gray-200 text-gray-900 text-sm rounded-t-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
         >
-          <option>Statistics</option>
-          <option>Services</option>
-          <option>FAQ</option>
+          <option></option>
+          <option>Servicios</option>
+          <option>FAQs</option>
         </select>
       </div>
       <ul
@@ -30,7 +30,7 @@ export const Tabinfo = () => {
             aria-selected='true'
             className='inline-block w-full p-4 rounded-ss-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600'
           >
-            Statistics
+            Envios
           </button>
         </li>
         <li className='w-full'>
@@ -43,7 +43,7 @@ export const Tabinfo = () => {
             aria-selected='false'
             className='inline-block w-full p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600'
           >
-            Services
+            Servicios
           </button>
         </li>
         <li className='w-full'>
@@ -56,7 +56,7 @@ export const Tabinfo = () => {
             aria-selected='false'
             className='inline-block w-full p-4 rounded-se-lg bg-gray-50 hover:bg-gray-100 focus:outline-none dark:bg-gray-700 dark:hover:bg-gray-600'
           >
-            FAQ
+            FAQs
           </button>
         </li>
       </ul>
@@ -182,8 +182,8 @@ export const Tabinfo = () => {
           <div
             id='accordion-flush'
             data-accordion='collapse'
-            data-active-classNamees='bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
-            data-inactive-classNamees='text-gray-500 dark:text-gray-400'
+            // data-active-classNamees='bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
+            // data-inactive-classNamees='text-gray-500 dark:text-gray-400'
           >
             <h2 id='accordion-flush-heading-1'>
               <button
@@ -204,9 +204,9 @@ export const Tabinfo = () => {
                 >
                   <path
                     stroke='currentColor'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
                     d='M9 5 5 1 1 5'
                   />
                 </svg>
@@ -255,9 +255,9 @@ export const Tabinfo = () => {
                 >
                   <path
                     stroke='currentColor'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
                     d='M9 5 5 1 1 5'
                   />
                 </svg>
@@ -308,9 +308,9 @@ export const Tabinfo = () => {
                 >
                   <path
                     stroke='currentColor'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    stroke-width='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
                     d='M9 5 5 1 1 5'
                   />
                 </svg>
