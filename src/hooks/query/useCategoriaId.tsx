@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { Product } from '../../interfaces';
 import { categoriasActions } from '..';
 
-export const useCategoriaId = (id: number) => {
+export const useCategoriaId = (id: string) => {
   const categoriaIdQuery = useQuery<Product>({
     queryKey: ['categoria', id],
     queryFn: () => categoriasActions.getCategoriaById(id),
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     placeholderData: {
       message: 'Resultados solicitados.',
       messageType: 'success',
