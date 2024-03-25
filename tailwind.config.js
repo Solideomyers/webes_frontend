@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 import headlessuiPlugin from '@headlessui/tailwindcss';
 import keepPreset from 'keep-react/preset';
+import {nextui} from "@nextui-org/react"
+import Typography from '@tailwindcss/typography';
+
 export default {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
     'node_modules/keep-react/**/*.{js,jsx,ts,tsx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -16,9 +20,7 @@ export default {
       linearGradientDirections: {
         br: 'to bottom right',
       },
-      flash: {
-        transition: 'all 0.2s ease-in-out',
-      },
+      
       aspectRatio: {
         '4/3': '4 / 3',
         '16/9': '16 / 9',
@@ -53,12 +55,7 @@ export default {
         'primary-light': '#AACB62',
       },
       keyframes: {
-        destello: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': {
-            transform: 'translateX(100%)',
-          },
-        },
+        
         reveal: {
           '0%': { opacity: '0', transform: 'translateY(100px)' },
           '50%': { opacity: '1' },
@@ -121,7 +118,6 @@ export default {
       enterFromRight: 'enterFromRight 350ms ease',
       exitToLeft: 'exitToLeft 250ms ease',
       exitToRight: 'exitToRight 250ms ease',
-      destello: 'destello 1s ease-in-out infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       spin: 'spin 2s linear infinite',
     },
@@ -129,6 +125,13 @@ export default {
   screens: {
     xs: '420px',
   },
-  plugins: [headlessuiPlugin({ prefix: 'ui' })],
+  darkMode: 'class',
+  plugins: [headlessuiPlugin({ prefix: 'ui' }), nextui({
+
+
+    layout: {
+    
+  },
+  }), Typography() ],
   presets: [keepPreset],
 };
