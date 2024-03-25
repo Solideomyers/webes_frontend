@@ -2,7 +2,7 @@ import { categoriasApi } from '../../hooks';
 import { type Categorias, type Product } from '../../interfaces';
 
 interface Props {
-  (id: number): Promise<Product>;
+  (id: string): Promise<Product>;
 }
 
 export const getCategorias = async () => {
@@ -13,15 +13,17 @@ export const getCategorias = async () => {
 export const getCategoriasInfinite = async ({
   pageParam,
 }: {
-  pageParam: number;
+  pageParam: string | number;
 }) => {
   const { data } = await categoriasApi.get<Categorias>(
-    `/categorias?page=${pageParam}`
+    `/categorias?page=${Number(pageParam)}`
   );
   return data;
 };
 
-export const getCategoriaById: Props = async (id: number) => {
-  const { data } = await categoriasApi.get(`/categorias/${id}`);
+export const getCategoriaById: Props = async (id: string) => {
+  const { data } = await categoriasApi.get(
+    `/categorias/${Number(id) ? Number(id) : 1}`
+  );
   return data;
 };
