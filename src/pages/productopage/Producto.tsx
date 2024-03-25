@@ -2,19 +2,24 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { formatDescription, useFloatBtn, useProducto } from '../../hooks';
-import { Img, Related } from '../../interfaces';
+import { type Related } from '../../interfaces';
 import {
   Accordeon,
   ProductoDetail,
   ProductoSk,
   ProductosRelated,
 } from '../../components';
+import { useQueryClient } from '@tanstack/react-query';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export const ProductoView = React.memo(() => {
   const { idp, ido } = useParams<{
     idp: string;
     ido: string;
   }>();
+
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueriesData({ queryKey: ['producto', idp, ido] });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,27 +40,24 @@ export const ProductoView = React.memo(() => {
     () => formatDescription(productoQuery?.data?.data?.description || ''),
     [productoQuery?.data?.data.description]
   );
-
   const imgs = useMemo(() => {
-    return productoQuery?.data?.data.img
-      ?.slice(0, 6)
-      ?.map((item: Img, i: number) => (
-        <div
-          key={i}
-          className='h-50 border border-gray-200 p-2 w-full max-w-content z-10 flex justify-center items-center rounded-3xl'
-        >
-          <img
-            className='w-full hover:shadow-xl object-cover object-center rounded-3xl hover:scale-100 transition-transform duration-100 delay-100 ease-in-out'
-            alt='carousel de productos'
-            src={item?.img_path && item.img_path}
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              e.currentTarget.src = `https://dummyimage.com/300/bababa/fff.png`;
-            }}
-          />
-        </div>
-      ));
+    return productoQuery?.data?.data.img?.slice(0, 4)?.map((item, i) => (
+      <div
+        key={i}
+        className='h-50 border border-gray-200 p-2 w-full max-w-content z-10 flex justify-center items-center rounded-3xl'
+      >
+        <LazyLoadImage
+          className='img-lazy w-full hover:shadow-xl object-cover object-center rounded-3xl hover:scale-100 transition-transform duration-100 delay-100 ease-in-out'
+          alt='carousel de productos'
+          src={item?.img_path}
+          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+            e.currentTarget.src = `https://dummyimage.com/300/bababa/fff.png`;
+          }}
+        />
+      </div>
+    ));
   }, [productoQuery]);
-  console.log(productoQuery.data?.data.related);
+
   const relateProductos = useMemo(() => {
     return productoQuery.data?.data.related.map((item: Related, i: number) => (
       <div
@@ -64,6 +66,7 @@ export const ProductoView = React.memo(() => {
       >
         <div className='h-50 border border-[#ccc] p-2 hover:animate-scaleIn transition-transform delay-100 duration-100 w-full max-w-content z-10 flex justify-center items-center rounded-3xl'>
           <img
+            role='img'
             className='w-full hover:shadow-xl object-cover object-center rounded-3xl hover:scale-100 transition-transform duration-100 delay-100 ease-in-out'
             alt='carousel de productos'
             src={`https://dummyimage.com/300/bababa/fff.png`}
@@ -95,7 +98,7 @@ export const ProductoView = React.memo(() => {
           atributos={productoQuery?.data?.data.atributos || []}
           proname={productoQuery?.data?.data.proname || ''}
           cat_name={productoQuery?.data?.data.cat_name || ''}
-          img={imgs || []}
+          imgs={imgs || []}
           attribute_price={productoQuery?.data?.data.attribute_price || ''}
           description={formattedDescription}
         />
