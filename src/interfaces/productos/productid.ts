@@ -135,3 +135,18 @@ export interface Totales {
   opcMedidas: number;
   related: number;
 }
+
+// interfaces for management state porduct selected in ProductoDetail, SeccionDetail and DropdownUI
+export interface Selected {
+  selected?: Atributo;
+  setSelected?: React.Dispatch<React.SetStateAction<Atributo>>;
+}
+
+export interface ProductPropoerties extends Selected {
+  cat_name: string;
+  proname: string;
+  attribute_price: string;
+  description: string;
+  atributos: Atributo[];
+  imgs?: JSX.Element[];
+}
