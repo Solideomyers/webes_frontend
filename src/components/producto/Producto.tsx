@@ -1,17 +1,22 @@
 'use client';
-import React from 'react';
+
+import { Card, CardBody, CardFooter, Image } from '@nextui-org/react';
+
 import { useNavigate } from 'react-router-dom';
-import { Badge, Card } from 'keep-react';
-import { Heart, ShoppingCart, MagnifyingGlass } from 'phosphor-react';
-import img from '../../assets/herosection.jpg';
-import { Button } from '..';
+// import img from '../../assets/herosection.jpg';
 import { type ProductsByCat } from '../../interfaces';
 import { useProductContext } from '../../context/ProductContext';
-
+import { FaCartPlus } from 'react-icons/fa6';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import { TbTruckDelivery } from 'react-icons/tb';
+import { MdLocalOffer } from 'react-icons/md';
+import { memo } from 'react';
 interface Props extends ProductsByCat {
   offer: boolean;
   prefetchProduct?: (idp: number, ido: number) => void;
 }
+
+const CardMemo = memo(Card);
 
 export const Producto: React.FC<Props> = ({
   attribute_price,
@@ -19,7 +24,7 @@ export const Producto: React.FC<Props> = ({
   idp,
   id_o,
   id_category,
-  offer,
+  offer = false,
   description,
   cat_name,
   prefetchProduct,
@@ -42,59 +47,97 @@ export const Producto: React.FC<Props> = ({
   };
 
   const navigate = useNavigate();
+
   const handleRoute = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate(`/categoria/${id_category}/producto/${idp}/${id_o}`);
     e.preventDefault();
   };
 
   return (
-    <Card
-      className='relative size-30 border border-[#ccc] hover:scale-y-105 hover:shadow-lg transition-transform ease-in-out duration-300 animate-fadeIn'
-      imgSrc={img}
-      imgSize='md'
+    <CardMemo
+      className=' bg-primary/5 w-full aspect-auto border border-[#ccc]'
+      shadow='sm'
+      isPressable
+      onPress={() => console.log('item pressed')}
     >
-      <Card.Container className='border hover:animate-pulse absolute top-4 right-4 flex items-center justify-center  h-10 w-10 cursor-pointer rounded-full bg-metal-50/50'>
-        <Heart size={20} weight='bold' color='white' />
-      </Card.Container>
-      <Card.Container className='mt-1 px-2 py-2 pb-2 place-items-center grid grid-rows-3 grid-col-2'>
-        <Card.Container className='flex items-center justify-between w-full row-start-1 row-span-1 col-span-2'>
-          <Badge
-            size='xs'
-            colorType='light'
-            color={`${offer ? 'error' : 'gray'}`}
+      <CardBody className='overflow-visible p-0'>
+        <Image
+          shadow='sm'
+          isZoomed
+          radius='lg'
+          width='100%'
+          alt={'image'}
+          className='w-full object-cover'
+          src='https://dummyimage.com/300/bababa/fff.png'
+        />
+      </CardBody>
+      <CardFooter className='flex flex-col gap-1 justify-center text-small items-start'>
+        <div className='flex flex-col items-start w-full'>
+          <b className='text-text-color text-left text-ellipsis w-full mb-1'>
+            {proname}
+          </b>
+          <div
+            className={`flex ${
+              offer ? 'justify-between' : 'justify-end'
+            } gap-2 w-full`}
           >
-            {offer ? 'Oferta' : 'Actualizado'}
-          </Badge>
-          <Card.Title>Desde {attribute_price}$</Card.Title>
-        </Card.Container>
-        <Card.Container className='row-start-2 row-span-2 col-span-2'>
-          <Card.Title className='truncate'>{proname}</Card.Title>
-          <Card.Description>
-            <span
-              dangerouslySetInnerHTML={{ __html: textDescription }}
-              className='grid grid-cols-1 grid-rows-1 font-light text-sm whitespace-pre-wrap truncate overflow-hidden h-10 '
-            />
-          </Card.Description>
-        </Card.Container>
-        <Card.Container className='grid grid-cols-2 py-2 gap-x-2 row-start-4 row-span-1 col-span-2'>
-          <Button onClick={handleAddProduct} variant={'primary'}>
-            <span className='pr-2'>
-              <ShoppingCart size={24} />
+            {/* offer */}
+            {offer ? (
+              <div className='flex gap-1 shadow bg-[#ffc6c6] text-[#a31111] rounded-xl py-1 px-2'>
+                <span className='font-medium'>10%</span>
+
+                <MdLocalOffer className='text-[#a31111]' size={20} />
+              </div>
+            ) : (
+              ''
+            )}
+            {/* price */}
+            <p className=' font-semibold text-primary text-right'>
+              Desde {attribute_price}$
+            </p>
+          </div>
+          <div className='flex justify-between items-center w-full'>
+            <p className='flex items-center gap-1 bg-[#cccccc12] rounded-xl p-2 font-semibold text-[#000000c4]'>
+              <FaStar className='text-[rgb(238,207,50)]' />
+              <FaStar className='text-[rgb(238,207,50)]' />
+              <FaStar className='text-[rgb(238,207,50)]' />
+              <FaStar className='text-[rgb(238,207,50)]' />
+              <FaStarHalfAlt className='text-[rgb(238,207,50)]' /> 4.2
+            </p>
+
+            <span className='flex gap-1 items-center border p-2 rounded-xl shadow text-xs font-semibold text-[#000000be]'>
+              <TbTruckDelivery />
+              Entrega 24H
             </span>
-            Añadir
-          </Button>
-          <Button
-            onMouseEnter={() => prefetchProduct && prefetchProduct(idp, id_o)}
-            onClick={handleRoute}
-            variant={'secondary'}
-          >
-            <span className='pr-2'>
-              <MagnifyingGlass size={24} />
-            </span>
-            Detalle
-          </Button>
-        </Card.Container>
-      </Card.Container>
-    </Card>
+          </div>
+
+          {/* <div className='flex justify-end py-2 border w-full'>
+          </div> */}
+        </div>
+        <div className='flex flex-row-reverse justify-between items-center w-full'>
+          <div>
+            <button
+              onClick={handleAddProduct}
+              className='flex justify-center items-center hover:scale-105 transition-all ease-out delay-150 p-2 bg-primary text-white rounded-xl w-full'
+              type='submit'
+            >
+              <FaCartPlus />
+            </button>
+            {/* <FaCartPlus /> */}
+          </div>
+          <div>
+            {/* <h1>Ver producto</h1> */}
+            <button
+              onClick={handleRoute}
+              onMouseEnter={() => prefetchProduct && prefetchProduct(idp, id_o)}
+              className='flex justify-center items-center text-primary border-2 border-primary p-2 shadow-inner shadow-[#ccccccf6] scale-110 hover:scale-105 transition-transform hover:shadow-md hover:border-white hover:text-white hover:bg-primary ease-in-out duration-150 transform-gpu rounded-xl'
+              type='submit'
+            >
+              Ver producto
+            </button>
+          </div>
+        </div>
+      </CardFooter>
+    </CardMemo>
   );
 };
